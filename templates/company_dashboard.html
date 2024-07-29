@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Company Dashboard</title>
+    <style>
+        .bench-category {
+            display: inline-block;
+            margin: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #337ab7;
+            cursor: pointer;
+        }
+
+            .bench-category:hover {
+                color: #23527c;
+            }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Company Dashboard</h1>
+    <p>Hello, {{ session.username }}!</p>
+    <p>You are logged in as a company user.</p>
+    <h2>Bench Available by Category</h2>
+    <div>
+        <a href="{{ url_for('company.bench_resources', category='engineers') }}" class="bench-category">
+            <i class="fas fa-users"></i> Engineers ({{ engineers_count }})
+        </a>
+        <a href="{{ url_for('company.bench_resources', category='seating_space') }}" class="bench-category">
+            <i class="fas fa-chair"></i> Seating Space ({{ seating_space_count }})
+        </a>
+        <a href="{{ url_for('company.bench_resources', category='product_licenses') }}" class="bench-category">
+            <i class="fas fa-key"></i> Product Licenses ({{ product_licenses_count }})
+        </a>
+        <!-- Add more categories as needed -->
+    </div>
+
+    <!-- Add a link to the booked resources page -->
+    <p><a href="{{ url_for('company.booked_resources') }}">View Booked Resources</a></p>
+</body>
+</html>

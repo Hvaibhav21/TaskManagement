@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Task Dashboard</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Open Tasks</th>
+                    <th>Assigned To</th>
+                    <th>Status</th>
+                    <!--<th>Status</th>-->
+                    <!--{% if is_admin %}
+                    <th>Presence</th>
+                    {% endif %}-->
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in dashboard %}
+                <tr>
+                    <td>{{ task[0] }}</td>
+                    <td>{{ task[1]}}</td>
+                    <td>
+                        {% if task[2]%}
+                        {% if isAdmin%}
+                        <form method="post" action="/toggle_task_status">
+                            <input type="hidden" name="user_id" value="{{ task[3]}}">
+                            <input type="hidden" name="assignment_id" value="{{ task[5]}}">
+                            <button type="submit" class="btn btn-sm {{ 'btn-success' if not task.IsAbsent else 'btn-danger' }}">
+                                Completed
+                            </button>
+                        </form>
+                        {% else %}
+                        <button type="submit" class="btn btn-sm {{ 'btn-success' if not task.IsAbsent else 'btn-danger' }}">
+                            Completed
+                        </button>
+                        {% endif %}
+                        {% else %}
+
+                        <form method="post" action="/toggle_task_status">
+                            <input type="hidden" name="user_id" value="{{ task[3]}}">
+                            <input type="hidden" name="assignment_id" value="{{ task[5]}}">
+
+                            <button type="submit" class="btn btn-sm {{ 'btn-danger' if not task.IsAbsent else 'btn-danger' }}">
+                                Pending
+                            </button>
+                        </form>
+
+                        {% endif %}
+                    </td>
+                    <!--<td>{{ task[3]}}</td>-->
+                    <!--{% if is_admin %}
+                    <td>
+                        <form method="post" action="/toggle_presence">
+                            <input type="hidden" name="person_id" value="{{ task.PersonID }}">
+                            <button type="submit" class="btn btn-sm {{ 'btn-success' if not task.IsAbsent else 'btn-danger' }}">
+                                {{ 'Present' if not task.IsAbsent else 'Absent' }}
+                            </button>
+                        </form>
+                    </td>
+                    {% endif %}-->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

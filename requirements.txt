@@ -1,0 +1,7 @@
+Flask
+pyodbc
+Flask-WTF
+WTForms
+hashlib
+hash_password
+bcrypt
